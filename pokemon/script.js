@@ -5,26 +5,42 @@ let pokemonContainer = document.querySelector(".pokemon-main-container")
 function createTypes(list, ul){
     list.forEach(function(type){
         let itemLi = document.createElement('li');
-        itemLi.innerText = type['type']['name'];
+        let text = type['type']['name']
+        itemLi.innerText = text.toUpperCase();
         ul.append(itemLi);
 
     });
 }
 
 function renderPokemon(data){
+    //Create card container
     let pokeContainer = document.createElement("div") //div will be used to hold the data/details for indiviual pokemon.{}
-    let pokeName = document.createElement('h4')
-    pokeName.innerText = data.name
-    let pokeNumber = document.createElement('p')
-    pokeNumber.innerText = `#${data.id}`
-    let pokeTypes = document.createElement('ul')
+    pokeContainer.classList.add('card');
+    pokeContainer.style.width = "25rem"
+    pokeContainer.style.height = "40rem"
+    //create image
     let image = document.createElement('img');
+    image.classList.add('card-img-top')
     let imgURL = data.sprites['front_default'];
     image.src = `${imgURL}`;
-    //ul list will hold the pokemon types
+    // image.style.height = "16rem"
+    //Create card title
+    let textContainer = document.createElement('div');
+    textContainer.classList.add('card-body');
+    let pokeName = document.createElement('h4')
+    pokeName.innerText = data.name.toUpperCase();
+    //Create Pokemon Id number
+    let pokeNumber = document.createElement('p')
+    pokeNumber.innerText = `#${data.id}`
+    //Create list of pokemon abilities
+    let pokeTypes = document.createElement('ul')
     createTypes(data.types, pokeTypes)
+    let btn = document.createElement('button');
+    btn.innerText = "See more"
+    btn.classList.add('btn', 'btn-warning', 'btn-lg');
+    textContainer.append(pokeName, pokeNumber, pokeTypes, btn);
     // helper function to go through the types array and create li tags for each one
-    pokeContainer.append(pokeName,image,pokeNumber, pokeTypes);
+    pokeContainer.append(image, textContainer);
     // pokeContainer.append(pokeName, pokeNumber)
     // //appending all details to the pokeContainer div
     pokemonContainer.appendChild(pokeContainer);
