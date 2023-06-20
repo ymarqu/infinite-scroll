@@ -30,7 +30,10 @@ function createModalImages(url){
 
 function renderInfoOnModal(data){
     let modalBody = document.querySelector('.modal-body');
+    let modalTitle = document.querySelector('.modal-title');
+    modalTitle.textContent = data.name;
     let rowContainer = document.querySelector('.modal-row');
+    rowContainer.innerHTML = '';
     let imgURL = data.sprites['front_default'];
     let frontDiv = createModalImages(imgURL) ;
     let img2URL = data.sprites['back_default'];
