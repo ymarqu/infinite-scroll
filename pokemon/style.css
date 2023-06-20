@@ -27,18 +27,26 @@ body{
     row-gap: 15px;
 }
 .card{
-    background-color: #ECF2FF ;
+    /* background-color: #ECF2FF ; */
+    background-color: #FFFAD7;
     border: solid 4px #FFDE00;
     justify-self: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+/* .card-img-top{
+    margin: 20px;
+} */
 .card-body{
     background-color: #FFFAD7;
+    text-align: center;
 }
-/* .card-img-top{
+.card-img-top{
+    background-color: #3B4CCA;
+    margin: auto auto;
+    margin-top: 20px;
     width: 80%;
-} */
-
+    border: solid 4px #FFDE00;
+}
 /* MODAL */
 
 

@@ -2,6 +2,13 @@ const linkContainer = document.querySelector(".link");
 let pokemonContainer = document.querySelector(".pokemon-main-container")
 
 
+const myModal = document.getElementById('modal')
+
+
+// myModal.addEventListener('shown.bs.modal', () => {
+//  console.log('works')
+// })
+
 function createTypes(list, ul){
     list.forEach(function(type){
         let itemLi = document.createElement('li');
@@ -12,15 +19,36 @@ function createTypes(list, ul){
     });
 }
 
+function createModalImages(url){
+    let div = document.createElement('div');
+    div.classList.add('col');
+    let img = document.createElement('img');
+    img.src = `${url}`;
+    div.append(img);
+    return div;
+}
+
+function renderInfoOnModal(data){
+    let modalBody = document.querySelector('.modal-body');
+    let rowContainer = document.querySelector('.modal-row');
+    let imgURL = data.sprites['front_default'];
+    let frontDiv = createModalImages(imgURL) ;
+    let img2URL = data.sprites['back_default'];
+    let backDiv = createModalImages(img2URL)
+    rowContainer.append(frontDiv, backDiv);
+
+    console.log(data)
+}
+
 function renderPokemon(data){
     //Create card container
     let pokeContainer = document.createElement("div") //div will be used to hold the data/details for indiviual pokemon.{}
     pokeContainer.classList.add('card');
     pokeContainer.style.width = "25rem"
-    pokeContainer.style.height = "40rem"
+    pokeContainer.style.height = "35rem"
     //create image
     let image = document.createElement('img');
-    image.classList.add('card-img-top')
+    image.classList.add('card-img-top', 'img-fluid')
     let imgURL = data.sprites['front_default'];
     image.src = `${imgURL}`;
     // image.style.height = "16rem"
@@ -31,14 +59,20 @@ function renderPokemon(data){
     pokeName.innerText = data.name.toUpperCase();
     //Create Pokemon Id number
     let pokeNumber = document.createElement('p')
-    pokeNumber.innerText = `#${data.id}`
+    pokeNumber.innerText = `No. ${data.id}`;
+    pokeNumber.classList.add('text-danger', 'fw-bold')
     //Create list of pokemon abilities
-    let pokeTypes = document.createElement('ul')
-    createTypes(data.types, pokeTypes)
+    // let pokeTypes = document.createElement('ul')
+    // createTypes(data.types, pokeTypes)
     let btn = document.createElement('button');
     btn.innerText = "See more"
     btn.classList.add('btn', 'btn-warning', 'btn-lg');
-    textContainer.append(pokeName, pokeNumber, pokeTypes, btn);
+    btn.dataset.bsToggle = "modal"
+    btn.dataset.bsTarget = "#exampleModal"
+    btn.addEventListener('click', () => {
+        renderInfoOnModal(data);
+    })
+    textContainer.append(pokeName, pokeNumber, btn);
     // helper function to go through the types array and create li tags for each one
     pokeContainer.append(image, textContainer);
     // pokeContainer.append(pokeName, pokeNumber)
@@ -64,7 +98,6 @@ async function getPokemon(){
         console.log(err);
     }
 }
-
 
 
 getPokemon();
