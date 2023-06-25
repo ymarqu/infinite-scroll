@@ -4,10 +4,11 @@ html{
 body{
     margin: 0;
     min-height: 100vh;
-    background-color: whitesmoke;
+    background-color: #000;
     font-family: 'Roboto', sans-serif;
 }
 h1{
+    color: aliceblue;
     text-align: center;
     margin-top: 25px;
     margin-bottom: 15px;
@@ -21,7 +22,7 @@ h1{
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #000;
     border-radius: 50px;
 }
 .loader img{
@@ -32,9 +33,16 @@ h1{
 }
 .img-container{
     margin: 10px 10%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: 1fr;
+    row-gap: 20px;
+    column-gap: 10px;
 }
 .img-container img{
     width: 100%;
+    margin-top: 2rem;
+    align-self: center ;
 }
 @media screen and (max-width: 400px) {
     h1{
