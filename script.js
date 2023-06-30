@@ -3,8 +3,7 @@ let count = 30;
 let totalImages = 30
 let isReady = false;
 const imgContainer = document.querySelector('.img-container');
-const acessKey = "";
-const secreteKey = "";
+let acessKey = config.ACCESSKEY;
 const url = `https://api.unsplash.com/photos/random/?count=${count}&client_id=${acessKey}&orientation=portrait`;
 let photosArr = [];
 
@@ -14,7 +13,7 @@ function imageLoaded(){
     console.log(imagesLoaded)
     if(imagesLoaded === totalImages){
         isReady = true;
-        // loader.hidden = true;
+        loader.hidden = true;
         console.log("ready")
     }
 }
